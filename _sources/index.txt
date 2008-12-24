@@ -1,0 +1,66 @@
+.. Batok's HQ at GitHub documentation master file, created by sphinx-quickstart on Tue Dec 23 23:44:40 2008.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+My HQ at GitHub
+=====================
+
+Projects
+--------
+
+* couchdb-wxpython
+
+* blogcdb
+
+* objectlistview-mirror
+
+* scalaris-mirros
+
+* batok.github.com
+
+Some Snippets
+-------------
+
+couchdb-wxpython::
+
+        class Screenshot(object):
+	        def __init__(self, filename = "snap.png"):
+        	        self.filename = filename
+        	        try:
+			        p = wx.GetDisplaySize()
+            		        self.p = p
+            		        bitmap = wx.EmptyBitmap( p.x, p.y)
+            		        dc = wx.ScreenDC()
+            		        memdc = wx.MemoryDC()
+            		        memdc.SelectObject(bitmap)
+            		        memdc.Blit(0,0, p.x, p.y, dc, 0,0)
+            		        memdc.SelectObject(wx.NullBitmap)
+            		        bitmap.SaveFile(filename, wx.BITMAP_TYPE_PNG )
+            
+                	except:
+            	        	self.filename = ""
+
+
+        class Post( schema.Document):
+	        author = schema.TextField()
+	        subject = schema.TextField()
+	        content = schema.TextField()
+	        tags = schema.ListField( schema.TextField() )
+	        comments = schema.ListField( schema.DictField(schema.Schema.build(
+	        comment_author = schema.TextField(),
+	        comment = schema.TextField(),
+	        comment_date = schema.DateTimeField()
+	        )))
+	        date = schema.DateTimeField()
+
+        class Design( schema.Document):
+        	by_author = schema.View("all", map_func_by_author) 
+	        by_date = schema.View("all", map_func_by_date) 
+	        all = schema.View("all", map_func_all) 
+	        tags = schema.View("all", map_func_tags, reduce_func_tags) 
+
+
+.. toctree::
+   :maxdepth: 2
+
+
